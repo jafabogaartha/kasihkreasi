@@ -8,10 +8,10 @@ export function Footer() {
           {/* Logo & Copyright */}
           <div className="text-center md:text-left">
             <a href="#" className="font-serif text-xl font-bold tracking-tight">
-              JeparaDigital
+              kasihKreasi
             </a>
             <p className="text-sm text-muted-foreground mt-1">
-              © 2024 JeparaDigital. Dibuat dengan ❤️ di Jepara.
+              © 2024 kasihKreasi. Dibuat dengan ❤️ di Jepara.
             </p>
           </div>
 

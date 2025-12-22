@@ -22,7 +22,7 @@ export function Navigation() {
             href="#" 
             className="font-serif text-xl font-bold tracking-tight hover:opacity-80 transition-opacity"
           >
-            JeparaDigital
+            kasihKreasi
           </a>
 
           {/* Desktop Navigation */}

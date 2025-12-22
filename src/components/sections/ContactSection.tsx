@@ -62,7 +62,7 @@ export function ContactSection() {
               </div>
               <div>
                 <h4 className="font-serif font-semibold text-lg mb-1">Email</h4>
-                <p className="opacity-80">halo@jeparadigital.id</p>
+                <p className="opacity-80">halo@kasihKreasi.id</p>
               </div>
             </StickerCard>
 
