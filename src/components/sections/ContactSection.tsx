@@ -62,7 +62,7 @@ export function ContactSection() {
               </div>
               <div>
                 <h4 className="font-serif font-semibold text-lg mb-1">Email</h4>
-                <p className="opacity-80">halo@kasihKreasi.id</p>
+                <p className="opacity-80">mail@kasihKreasi.web.id</p>
               </div>
             </StickerCard>
 
@@ -72,7 +72,7 @@ export function ContactSection() {
               </div>
               <div>
                 <h4 className="font-serif font-semibold text-lg mb-1">WhatsApp</h4>
-                <p className="opacity-80">+62 812-3456-7890</p>
+                <p className="opacity-80">+62 851-5514-5788</p>
               </div>
             </StickerCard>
 

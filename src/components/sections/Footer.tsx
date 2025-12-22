@@ -11,7 +11,7 @@ export function Footer() {
               kasihKreasi
             </a>
             <p className="text-sm text-muted-foreground mt-1">
-              © 2024 kasihKreasi. Dibuat dengan ❤️ di Jepara.
+              © 2025 kasihKreasi. Dibuat Oleh Kami.
             </p>
           </div>
 
