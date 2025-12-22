@@ -1,47 +1,60 @@
 import { ServiceCard } from "@/components/ServiceCard";
 import { HighlightText } from "@/components/ui/highlight-text";
-import { Users, Video, BarChart3, MessageCircle, Camera, Megaphone } from "lucide-react";
+import {
+  Users,
+  Video,
+  BarChart3,
+  Code,
+  Mic,
+  Megaphone
+} from "lucide-react";
 
 const services = [
   {
     icon: Users,
     title: "Social Media Management",
-    description: "Kelola seluruh akun sosial mediamu dengan strategi konten yang konsisten dan engaging. Dari Instagram, TikTok, sampai LinkedIn.",
+    description:
+      "Kelola akun sosial media secara profesional dengan strategi konten yang konsisten, relevan, dan sesuai target audiens.",
     variant: "yellow" as const,
     rotate: "left" as const,
   },
   {
     icon: Video,
     title: "Video Content Production",
-    description: "Produksi video pendek yang viral-ready. Reels, TikTok, YouTube Shorts—semua format yang bikin audience stay.",
+    description:
+      "Produksi video pendek untuk Reels, TikTok, dan Shorts dengan konsep yang engaging dan siap perform.",
     variant: "blue" as const,
     rotate: "right" as const,
   },
   {
     icon: BarChart3,
     title: "Analytics & Reporting",
-    description: "Insights yang actionable, bukan cuma angka-angka. Kami bantu kamu memahami apa yang works dan apa yang perlu diubah.",
+    description:
+      "Laporan performa yang jelas dan actionable untuk bantu ambil keputusan konten dan iklan lebih tepat.",
     variant: "mint" as const,
     rotate: "left" as const,
   },
   {
-    icon: MessageCircle,
-    title: "Community Management",
-    description: "Bangun komunitas yang loyal dan aktif. Kami handle engagement, respons, dan nurturing audiensmu.",
+    icon: Code,
+    title: "Web Development & Management",
+    description:
+      "Pembuatan dan pengelolaan website profesional—landing page, company profile, hingga web bisnis siap konversi.",
     variant: "pink" as const,
     rotate: "right" as const,
   },
   {
-    icon: Camera,
+    icon: Mic,
     title: "Content Creation",
-    description: "Foto produk, lifestyle content, dan visual storytelling yang bikin brandmu terlihat premium.",
+    description:
+      "Produksi konten visual lengkap dengan copywriting dan voice over untuk meningkatkan daya tarik brand.",
     variant: "default" as const,
     rotate: "left" as const,
   },
   {
     icon: Megaphone,
-    title: "Campaign Strategy",
-    description: "Kampanye digital yang terintegrasi—dari awareness sampai conversion, kami design semuanya.",
+    title: "Meta & TikTok Ads",
+    description:
+      "Strategi dan eksekusi iklan Meta Ads dan TikTok Ads untuk menjangkau audiens yang tepat dan meningkatkan conversion.",
     variant: "default" as const,
     rotate: "right" as const,
   },
@@ -56,10 +69,10 @@ export function ServicesSection() {
             Layanan Kami
           </span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold mb-6">
-            Semua yang kamu butuhkan untuk <HighlightText variant="blue">grow digital</HighlightText>
+            Solusi lengkap untuk <HighlightText variant="blue">bisnis digitalmu</HighlightText>
           </h2>
           <p className="text-lg text-muted-foreground">
-            Fokus ke bisnismu, biar urusan digital kami yang handle.
+            Dari konten, website, sampai iklan—kami bantu dari strategi sampai eksekusi.
           </p>
         </div>
 
