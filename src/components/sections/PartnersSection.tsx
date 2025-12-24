@@ -1,15 +1,16 @@
 import { HighlightText } from "@/components/ui/highlight-text";
 
-// Placeholder partner data - replace with actual logo images
+// Update: Mengarahkan ke file di folder public/logos
 const partners = [
-  { name: "Brand Partner 1", logo: null },
-  { name: "Brand Partner 2", logo: null },
-  { name: "Brand Partner 3", logo: null },
-  { name: "Brand Partner 4", logo: null },
-  { name: "Brand Partner 5", logo: null },
-  { name: "Brand Partner 6", logo: null },
-  { name: "Brand Partner 7", logo: null },
-  { name: "Brand Partner 8", logo: null },
+  { name: "Partner 1", logo: "/logos/1.webp" },
+  { name: "Partner 2", logo: "/logos/2.webp" },
+  { name: "Partner 3", logo: "/logos/3.webp" },
+  { name: "Partner 4", logo: "/logos/4.webp" },
+  { name: "Partner 5", logo: "/logos/5.webp" },
+  { name: "Partner 6", logo: "/logos/6.webp" },
+  { name: "Partner 7", logo: "/logos/7.webp" },
+  { name: "Partner 8", logo: "/logos/8.webp" },
+  { name: "Partner 9", logo: "/logos/9.webp" },
 ];
 
 export function PartnersSection() {
