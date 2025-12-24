@@ -1,6 +1,7 @@
+import { useState } from "react";
 import { HighlightText } from "@/components/ui/highlight-text";
 import { StickerCard } from "@/components/ui/sticker-card";
-import { Eye, TrendingUp } from "lucide-react"; // Import icon
+import { Eye, TrendingUp, Play, Loader2 } from "lucide-react";
 
 const videoItems = [
   {
@@ -45,6 +46,64 @@ const videoItems = [
   },
 ];
 
+// Komponen Satuan Video untuk menangani logika Click-to-Load
+function TikTokEmbed({ id, title }: { id: string; title: string }) {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handlePlay = () => {
+    setIsLoading(true);
+    setIsPlaying(true);
+  };
+
+  return (
+    <div className="relative aspect-[9/16] w-full h-full bg-black group cursor-pointer" onClick={!isPlaying ? handlePlay : undefined}>
+      
+      {!isPlaying ? (
+        // --- TAMPILAN AWAL (Placeholder Ringan) ---
+        <>
+          {/* Background Gradient agar tidak hitam polos */}
+          <div className="absolute inset-0 bg-gradient-to-br from-gray-900 to-black opacity-80" />
+          
+          {/* Judul Sementara di tengah (Visual Placeholder) */}
+          <div className="absolute inset-0 flex flex-col items-center justify-center p-4">
+            <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center backdrop-blur-sm border border-white/20 group-hover:scale-110 transition-transform duration-300">
+              <Play className="w-8 h-8 fill-white text-white ml-1" />
+            </div>
+            <p className="mt-4 text-xs text-muted-foreground font-mono">Click to Load Video</p>
+          </div>
+
+          {/* Badge Watch */}
+          <div className="absolute top-2 left-2 pointer-events-none z-10">
+            <span className="flex items-center gap-1 px-2 py-1 bg-black/60 text-white border border-white/20 rounded-full text-[10px] font-mono backdrop-blur-md">
+              <Eye className="w-3 h-3" />
+              Preview
+            </span>
+          </div>
+        </>
+      ) : (
+        // --- TAMPILAN SETELAH KLIK (Iframe Asli) ---
+        <>
+          {isLoading && (
+            <div className="absolute inset-0 flex items-center justify-center bg-black z-0">
+              <Loader2 className="w-8 h-8 text-blue-500 animate-spin" />
+            </div>
+          )}
+          <iframe
+            src={`https://www.tiktok.com/embed/v2/${id}?autoplay=1`} // autoplay=1 agar pas diklik lgsg jalan
+            className="w-full h-full object-cover relative z-10"
+            allowFullScreen
+            scrolling="no"
+            style={{ border: "none" }}
+            title={title}
+            onLoad={() => setIsLoading(false)}
+          ></iframe>
+        </>
+      )}
+    </div>
+  );
+}
+
 export function VideoPortfolioSection() {
   return (
     <section id="portofolio" className="py-20 md:py-28 bg-muted/30">
@@ -63,7 +122,7 @@ export function VideoPortfolioSection() {
             Strategi konten kreatif yang terbukti menghasilkan angka nyata untuk pertumbuhan brand Anda.
           </p>
 
-          {/* STATISTIK VIEW 23M+ */}
+          {/* STATISTIK VIEW 500M+ */}
           <div className="inline-flex items-center gap-4 bg-white border-2 border-border px-6 py-3 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
             <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600">
               <TrendingUp className="w-6 h-6" />
@@ -90,24 +149,8 @@ export function VideoPortfolioSection() {
               variant="default"
               className="group overflow-hidden p-0 border-2 border-border bg-black"
             >
-              <div className="relative aspect-[9/16] w-full h-full">
-                <iframe
-                  src={`https://www.tiktok.com/embed/v2/${video.id}`}
-                  className="w-full h-full object-cover"
-                  allowFullScreen
-                  scrolling="no"
-                  style={{ border: "none" }}
-                  title={video.title}
-                ></iframe>
-
-                {/* Badge Overlay (Pojok Kiri Atas) */}
-                <div className="absolute top-2 left-2 pointer-events-none z-10">
-                  <span className="flex items-center gap-1 px-2 py-1 bg-black/60 text-white border border-white/20 rounded-full text-[10px] font-mono backdrop-blur-md">
-                    <Eye className="w-3 h-3" />
-                    Watch
-                  </span>
-                </div>
-              </div>
+              {/* Panggil Komponen Custom Embed di sini */}
+              <TikTokEmbed id={video.id} title={video.title} />
               
               <div className="p-3 bg-card border-t border-border relative z-20">
                 <h4 className="font-medium text-sm truncate text-center">{video.title}</h4>
