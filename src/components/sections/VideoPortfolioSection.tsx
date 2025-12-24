@@ -1,129 +1,67 @@
-"use client"; // Wajib karena kita menggunakan useEffect untuk fetch data
-
-import { useState, useEffect } from "react";
 import { HighlightText } from "@/components/ui/highlight-text";
 import { StickerCard } from "@/components/ui/sticker-card";
-import { Eye, TrendingUp, Play, Loader2, Image as ImageIcon } from "lucide-react";
+import { Eye, TrendingUp, Play, ExternalLink } from "lucide-react";
 
-// CUKUP MASUKKAN ID SAJA
-// Tidak perlu link gambar manual lagi
+// --- DATA VIDEO ---
+// Saya tambahkan 'username' agar link-nya akurat
 const videoItems = [
-  { id: "7343849809855433990", title: "YouNeedMie Viral" },
-  { id: "7574276966958877960", title: "NiceCoffee Daily" },
-  { id: "7548715732658359558", title: "NiceCoffee Series" },
-  { id: "7546136738557676806", title: "NiceCoffee Highlight" },
-  { id: "7441972332639374648", title: "YouNeedMie Promo" },
-  { id: "7569466570603334933", title: "YouNeedMie Event" },
-  { id: "7440347498767535415", title: "YouNeedMie BTS" },
-  { id: "7327067387352583429", title: "YouNeedMie Launch" },
+  {
+    id: "7574276966958877960", 
+    username: "@nicecoffee.official",
+    title: "Nice Coffee Viral",
+    views: "51M", 
+    thumbnail: "/thumbnail/51jt.webp",
+  },
+  {
+    id: "7343849809855433990", 
+    username: "@youneedmie_official",
+    title: "YouNeedMie Viral",
+    views: "34M", 
+    thumbnail: "/thumbnail/34jt.webp",
+  },
+  {
+    id: "7441972332639374648", 
+    username: "@youneedmie_official",
+    title: "YouNeedMie Promo",
+    views: "23M", 
+    thumbnail: "/thumbnail/23jt.webp",
+  },
+  {
+    id: "7569466570603334933", 
+    username: "@youneedmie_official",
+    title: "YouNeedMie Event",
+    views: "2M", 
+    thumbnail: "/thumbnail/2jt.webp",
+  },
+  {
+    id: "7440347498767535415", 
+    username: "@youneedmie_official",
+    title: "YouNeedMie BTS",
+    views: "1M", 
+    thumbnail: "/thumbnail/1jt.webp",
+  },
+  {
+    id: "7548715732658359558", 
+    username: "@nicecoffee.official",
+    title: "Nice Coffee Series",
+    views: "980K",
+    thumbnail: "/thumbnail/980k.webp",
+  },
+  {
+    id: "7546136738557676806", 
+    username: "@nicecoffee.official",
+    title: "Nice Coffee Highlight",
+    views: "230K",
+    thumbnail: "/thumbnail/230k.webp",
+  },
+  {
+    id: "7327067387352583429", 
+    username: "@youneedmie_official",
+    title: "YouNeedMie Launch",
+    views: "148K",
+    thumbnail: "/thumbnail/148k.webp",
+  },
 ];
-
-// --- KOMPONEN PINTAR (Fetch Otomatis) ---
-function TikTokAutoEmbed({ id, title }: { id: string; title: string }) {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [thumbnailUrl, setThumbnailUrl] = useState<string | null>(null);
-  const [isImageLoading, setIsImageLoading] = useState(true);
-
-  // Efek: Ambil Sampul dari TikTok saat website dibuka
-  useEffect(() => {
-    async function fetchThumbnail() {
-      try {
-        // URL Video TikTok
-        const tiktokUrl = `https://www.tiktok.com/video/${id}`;
-        // API OEmbed TikTok (Resmi)
-        const oembedUrl = `https://www.tiktok.com/oembed?url=${tiktokUrl}`;
-        
-        // Kita pakai Proxy 'AllOrigins' untuk menembus bloking CORS browser
-        const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(oembedUrl)}`;
-
-        const res = await fetch(proxyUrl);
-        const data = await res.json();
-        
-        if (data.contents) {
-          const tiktokData = JSON.parse(data.contents);
-          setThumbnailUrl(tiktokData.thumbnail_url); // Dapat URL Sampul Otomatis!
-        }
-      } catch (error) {
-        console.error("Gagal ambil sampul:", error);
-      } finally {
-        setIsImageLoading(false);
-      }
-    }
-
-    fetchThumbnail();
-  }, [id]);
-
-  const handlePlay = () => {
-    setIsPlaying(true);
-  };
-
-  return (
-    <div 
-      className="relative aspect-[9/16] w-full h-full bg-gray-900 group cursor-pointer overflow-hidden" 
-      onClick={!isPlaying ? handlePlay : undefined}
-    >
-      
-      {!isPlaying ? (
-        // --- MODE 1: TAMPILKAN SAMPUL ---
-        <>
-          {/* Tampilkan Sampul jika sudah dapat fetch */}
-          {thumbnailUrl ? (
-            <img 
-              src={thumbnailUrl} 
-              alt={title} 
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 animate-in fade-in duration-500"
-            />
-          ) : (
-            // Skeleton Loading / Fallback jika gagal fetch
-            <div className="w-full h-full bg-neutral-800 flex items-center justify-center">
-               {isImageLoading ? (
-                 <Loader2 className="w-6 h-6 text-muted-foreground animate-spin" />
-               ) : (
-                 <ImageIcon className="w-8 h-8 text-neutral-700" />
-               )}
-            </div>
-          )}
-
-          {/* Overlay Gelap */}
-          <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors" />
-          
-          {/* Tombol Play */}
-          <div className="absolute inset-0 flex flex-col items-center justify-center p-4">
-            <div className="w-14 h-14 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-md border border-white/30 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-              <Play className="w-6 h-6 fill-white text-white ml-1" />
-            </div>
-            <p className="mt-3 text-[10px] uppercase tracking-widest text-white/80 font-semibold drop-shadow-md">
-              Play Video
-            </p>
-          </div>
-
-          {/* Badge */}
-          <div className="absolute top-2 left-2 pointer-events-none z-10">
-            <span className="flex items-center gap-1 px-2 py-1 bg-black/60 text-white border border-white/20 rounded-full text-[10px] font-mono backdrop-blur-md">
-              <Eye className="w-3 h-3" />
-              Preview
-            </span>
-          </div>
-        </>
-      ) : (
-        // --- MODE 2: LOAD VIDEO (Hanya saat diklik) ---
-        <>
-          <div className="absolute inset-0 flex items-center justify-center bg-black z-0">
-             <Loader2 className="w-8 h-8 text-blue-500 animate-spin" />
-          </div>
-          <iframe
-            src={`https://www.tiktok.com/embed/v2/${id}?autoplay=1`}
-            className="w-full h-full object-cover relative z-10"
-            allowFullScreen
-            scrolling="no"
-            style={{ border: "none" }}
-            title={title}
-          ></iframe>
-        </>
-      )}
-    </div>
-  );
-}
 
 export function VideoPortfolioSection() {
   return (
@@ -148,7 +86,7 @@ export function VideoPortfolioSection() {
             <div className="text-left">
               <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Total Views</p>
               <p className="text-2xl md:text-3xl font-black font-sans text-foreground">
-                500M<span className="text-blue-600">+</span>
+                112M<span className="text-blue-600">+</span>
               </p>
             </div>
           </div>
@@ -156,20 +94,70 @@ export function VideoPortfolioSection() {
 
         {/* Grid Video */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6">
-          {videoItems.map((video) => (
-            <StickerCard
-              key={video.id}
-              variant="default"
-              className="group overflow-hidden p-0 border-2 border-border bg-black"
-            >
-              {/* Panggil komponen pintar kita */}
-              <TikTokAutoEmbed id={video.id} title={video.title} />
-              
-              <div className="p-3 bg-card border-t border-border relative z-20">
-                <h4 className="font-medium text-sm truncate text-center">{video.title}</h4>
-              </div>
-            </StickerCard>
-          ))}
+          {videoItems.map((video, index) => {
+            // Kita buat Link manual ke TikTok
+            // Format: tiktok.com/@username/video/id
+            const tiktokUrl = `https://www.tiktok.com/${video.username}/video/${video.id}`;
+
+            return (
+              <StickerCard
+                key={index}
+                variant="default"
+                className="group overflow-hidden p-0 border-2 border-border bg-black transition-all hover:-translate-y-1"
+              >
+                {/* 
+                   LINK AREA: 
+                   Menggunakan tag <a> agar fungsi klik kanan -> open new tab tetap jalan 
+                */}
+                <a 
+                  href={tiktokUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="block relative aspect-[9/16] w-full h-full bg-gray-900 group cursor-pointer overflow-hidden"
+                >
+                  {/* SAMPUL VIDEO */}
+                  <img 
+                    src={video.thumbnail} 
+                    alt={video.title} 
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+
+                  {/* Overlay Gelap */}
+                  <div className="absolute inset-0 bg-black/10 group-hover:bg-black/30 transition-colors" />
+                  
+                  {/* BADGE VIEWS (Pojok Kiri Atas) */}
+                  <div className="absolute top-3 left-3 z-10">
+                    <span className="flex items-center gap-1.5 px-2.5 py-1 bg-black/60 text-white border border-white/20 rounded-lg text-xs font-bold font-sans backdrop-blur-md shadow-sm">
+                      <Eye className="w-3.5 h-3.5 text-white" />
+                      {video.views}
+                    </span>
+                  </div>
+
+                  {/* ICON PLAY (Tengah) - Sebagai Call to Action */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-14 h-14 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm border border-white/30 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                      <Play className="w-6 h-6 fill-white text-white ml-1" />
+                    </div>
+                  </div>
+
+                  {/* INFO USERNAME (Pojok Kiri Bawah) - Pengganti Foto Profil */}
+                  <div className="absolute bottom-3 left-3 z-10 flex items-center gap-1.5 opacity-90">
+                     <span className="flex items-center gap-1 text-[10px] bg-black/50 backdrop-blur-sm text-white px-2 py-0.5 rounded-full border border-white/10">
+                       <ExternalLink className="w-3 h-3" />
+                       {video.username}
+                     </span>
+                  </div>
+                </a>
+                
+                {/* Judul kecil di bawah card */}
+                <div className="p-3 bg-card border-t border-border relative z-20">
+                  <h4 className="font-medium text-xs md:text-sm truncate text-center text-muted-foreground group-hover:text-primary transition-colors">
+                    {video.title}
+                  </h4>
+                </div>
+              </StickerCard>
+            );
+          })}
         </div>
       </div>
     </section>
