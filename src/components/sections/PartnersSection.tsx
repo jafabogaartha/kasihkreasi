@@ -30,7 +30,8 @@ export function PartnersSection() {
         </div>
       </div>
 
-      <div className="relative flex flex-col gap-6 md:gap-8">
+      {/* Container utama marquee */}
+      <div className="relative flex flex-col gap-2 md:gap-4"> {/* Gap dikurangi sedikit karena padding row ditambah */}
         <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-20 md:w-32 bg-gradient-to-r from-background to-transparent z-10" />
         <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-20 md:w-32 bg-gradient-to-l from-background to-transparent z-10" />
 
@@ -45,7 +46,10 @@ function MarqueeRow({ items, direction }: { items: typeof partners; direction: "
   const duplicatedItems = [...items, ...items, ...items, ...items];
 
   return (
-    <div className="flex overflow-hidden">
+    // PERBAIKAN DI SINI:
+    // Tambahkan 'py-4' (padding vertical). 
+    // Ini memberi ruang kosong di atas dan bawah agar saat kartu naik, tidak kena potong 'overflow-hidden'.
+    <div className="flex overflow-hidden py-4">
       <div
         className="flex animate-marquee"
         style={{ animationDirection: direction === "right" ? "reverse" : "normal" }}
@@ -53,17 +57,11 @@ function MarqueeRow({ items, direction }: { items: typeof partners; direction: "
         {duplicatedItems.map((partner, index) => (
           <div key={`${partner.name}-${index}`} className="flex-shrink-0 mx-3 md:mx-4">
             
-            {/* 
-               PERUBAHAN DI SINI:
-               1. p-0: Hapus padding (sebelumnya p-2)
-               2. overflow-hidden: Agar gambar tidak "bocor" keluar dari rounded corners
-            */}
             <div className="w-[160px] h-[100px] md:w-[200px] md:h-[125px] bg-card border-2 border-border rounded-xl flex items-center justify-center p-0 overflow-hidden hover:shadow-md transition-all hover:-translate-y-1">
               {partner.logo ? (
                 <img
                   src={partner.logo}
                   alt={partner.name}
-                  // object-cover: Paksa gambar memenuhi seluruh kotak
                   className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all opacity-80 hover:opacity-100"
                 />
               ) : (
