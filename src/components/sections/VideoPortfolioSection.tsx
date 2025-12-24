@@ -79,6 +79,7 @@ export function VideoPortfolioSection() {
             Strategi konten kreatif yang terbukti menghasilkan angka nyata.
           </p>
 
+ {/* STATISTIK VIEW 23M+ */}
           <div className="inline-flex items-center gap-4 bg-white border-2 border-border px-6 py-3 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
             <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600">
               <TrendingUp className="w-6 h-6" />
@@ -86,10 +87,16 @@ export function VideoPortfolioSection() {
             <div className="text-left">
               <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Total Views</p>
               <p className="text-2xl md:text-3xl font-black font-sans text-foreground">
-                112M<span className="text-blue-600">+</span>
+                520M+<span className="text-blue-600">+</span>
               </p>
             </div>
+            <div className="h-8 w-[1px] bg-border mx-2 hidden md:block"></div>
+             <div className="hidden md:flex flex-col text-left">
+               <span className="text-xs text-muted-foreground">Organic & Ads</span>
+               <span className="text-xs font-semibold">Across TikTok & IG</span>
+             </div>
           </div>
+        </div>
         </div>
 
         {/* Grid Video */}
