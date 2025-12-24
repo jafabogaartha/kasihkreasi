@@ -71,7 +71,7 @@ export function VideoPortfolioSection() {
             <div className="text-left">
               <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Total Views</p>
               <p className="text-2xl md:text-3xl font-black font-sans text-foreground">
-                23M<span className="text-blue-600">+</span>
+                500M<span className="text-blue-600">+</span>
               </p>
             </div>
             <div className="h-8 w-[1px] bg-border mx-2 hidden md:block"></div>
